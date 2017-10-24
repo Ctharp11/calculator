@@ -1,25 +1,34 @@
+//Didn't use this file for the calculator. Didn't seem that efficient so start over in take2.js
+
 var numbers = document.getElementsByClassName('number');
 var operators = document.getElementsByClassName('operator');
 var equals = document.getElementById('equals');
 var clears = document.getElementById('clear');
 var screen = document.getElementById('screen');
 var numVar = [];
+var answer = false;
 
 
+//bugs: set calculator to only have 6 values at all times, parseInt rounding way too far at times
 
 clears.addEventListener('click', function(){
 	  screen.innerHTML = "";
 	  numVar=[];
+      answer=[];
     })
 
 function numbersGo() {
 	for(var i = 0; i < numbers.length; i++) {
 	    numbers[i].addEventListener('click', function() {
+        if (answer === true) {
+        screen.innerHTML = ''
+        answer = false;
+        }
 		var num = this.dataset.value;
 		numSet = screen.innerHTML += num;
 		numVar.push(num)
-	   }); 
-	 }
+	   })
+    }
 }
 
 
@@ -44,9 +53,9 @@ function operation (){
     		var xParse = parseFloat(x);
     		var yParse = parseFloat(y);
     		var realFinal = xParse + yParse;
-            console.log(realFinal.toString().length);
     		screen.innerHTML = parseFloat(realFinal);
     		numVar = [];
+            answer = true;
     	} 
     	else if (final.includes('-') === true) {
     		var n = final.indexOf('-');
@@ -57,6 +66,7 @@ function operation (){
     		var realFinal = xParse + yParse;
     		screen.innerHTML = parseFloat(realFinal);
     		numVar = [];
+            answer = true;
     	}
     	else if (final.includes('**') === true) {
     		var n = final.indexOf('**');
@@ -68,6 +78,7 @@ function operation (){
     		var realFinal = xParse ** yParse;
     		screen.innerHTML = parseFloat(realFinal);
     		numVar = [];
+            answer = true;
     	}
     	else if (final.includes('/') === true) {
     		var n = final.indexOf('/');
@@ -79,6 +90,7 @@ function operation (){
     		var realFinal = xParse / yParse;
     		screen.innerHTML = parseFloat(realFinal);
     		numVar = [];
+            answer = true;
     	}
     	else if (final.includes('*') === true) {
     		var n = final.indexOf('*');
@@ -90,6 +102,7 @@ function operation (){
     		var realFinal = xParse * yParse;
     		screen.innerHTML = parseFloat(realFinal);
     		numVar = [];
+            answer = true;
     	}
     })
 }
@@ -97,3 +110,4 @@ function operation (){
 numbersGo();
 operationSave();
 operation();
+

@@ -1,19 +1,24 @@
+//File in use for the calculator! 
+
 var numbers = document.getElementsByClassName('number');
 var operators = document.getElementsByClassName('operator');
 var equals = document.getElementById('equals');
 var clears = document.getElementById('clear');
 var screen = document.getElementById('screen');
-var firstVar;
-var operatorVar;
-var secondVar;
+var firstVar = [];
+var operatorVar = [];
+var secondVar = [];
+var answer = false;
 var runCalc = false;
+var lengthCheck = [];
 
 clears.addEventListener('click', function(){
 	  runCalc = false;
 	  screen.innerHTML = "";
-	  firstVar;
-	  operatorVar;
-      secondVar;
+	  firstVar = [];
+	  operatorVar = [];
+      secondVar = [];
+      answer = false;
 })
 
 firstNum();
@@ -25,9 +30,19 @@ function firstNum() {
 	for(var i = 0; i < numbers.length; i++) {
 	    numbers[i].addEventListener('click', function() {
 	    if (runCalc) {return};
+	    if (answer === true) {
+        screen.innerHTML = ''
+        answer = false;
+        secondVar = [];
+        firstVar = [];
+        }
 		var num = this.dataset.value;
-		letterParse = parseInt(num)
-		firstVar = screen.innerHTML += num;
+		lengthCheck.push(num)
+		if (lengthCheck.length <= 9) {
+			console.log('less than 9');
+		firstVar += num;
+		screen.innerHTML += num;
+	    }
 	    });
 	}
 }
@@ -38,8 +53,11 @@ function secondNum() {
 	    numbers[i].addEventListener('click', function() {
 	    if (runCalc === false) {return};
 		var num = this.dataset.value;
-		letterParse = parseInt(num)
-		secondVar = screen.innerHTML += num;
+		lengthCheck.push(num)
+		if (lengthCheck.length <= 9) {
+		secondVar += num;
+		screen.innerHTML += num;
+	    }
 	    });
 	}
 }
@@ -50,31 +68,86 @@ function operationSave() {
 			operatorVar = this.dataset.value;
 			screen.innerHTML = "";
 			runCalc = true;
+			lengthCheck = [];
 		})
 	}
 }
 
 function operate() {
    equals.addEventListener('click', function() {
-   	console.log("firstVar", firstVar);
-    console.log("secondVar", secondVar);
+   	console.log(firstVar + operatorVar + secondVar);
    	if (operatorVar === "+") {
    		var calculate = parseFloat(firstVar) + parseFloat(secondVar);
-   		screen.innerHTML = calculate;
+   		if (calculate.length <= 9) {
+   		    screen.innerHTML = Number((calculate).toFixed(5));
+   		    answer = true;
+   		    lengthCheck = [];
+   	    } else {
+   	    	var exponent = calculate.toExponential();
+   	    	var parseparse = parseFloat(exponent);
+   	    	var final = parseparse.toPrecision(6);
+   	    	screen.innerHTML = final;
+   	    	answer = true;
+   	    	lengthCheck = [];
+   	    }
    	} else if (operatorVar === "-") {
    		var calculate = parseFloat(firstVar) - parseFloat(secondVar);
-   		screen.innerHTML = calculate;
+   		if (calculate.length <= 9) {
+   		    screen.innerHTML = Number((calculate).toFixed(5));
+   		    answer = true;
+   		    lengthCheck = [];
+   	    } else {
+   	    	var exponent = calculate.toExponential();
+   	    	var parseparse = parseFloat(exponent);
+   	    	var final = parseparse.toPrecision(6);
+   	    	screen.innerHTML = final;
+   	    	answer = true;
+   	    	lengthCheck = [];
+   	    }
    	} else if (operatorVar === "**") {
    		var calculate = parseFloat(firstVar) ** parseFloat(secondVar);
-   		screen.innerHTML = parseFloat(calculate);
+   		if (calculate.length <= 9) {
+   		    screen.innerHTML = Number((calculate).toFixed(5));
+   		    answer = true;
+   		    lengthCheck = [];
+   	    } else {
+   	    	var exponent = calculate.toExponential();
+   	    	var parseparse = parseFloat(exponent);
+   	    	var final = parseparse.toPrecision(6);
+   	    	screen.innerHTML = final;
+   	    	answer = true;
+   	    	lengthCheck = [];
+   	    }
    	}
    	else if (operatorVar === "*") {
    		var calculate = parseFloat(firstVar) * parseFloat(secondVar);
-   		screen.innerHTML = parseFloat(calculate);
+   		if (calculate.length <= 9) {
+   		    screen.innerHTML = Number((calculate).toFixed(5));
+   		    answer = true;
+   		    lengthCheck = [];
+   	    } else {
+   	    	var exponent = calculate.toExponential();
+   	    	var parseparse = parseFloat(exponent);
+   	    	var final = parseparse.toPrecision(6);
+   	    	screen.innerHTML = final;
+   	    	answer = true;
+   	    	lengthCheck = [];
+   	    }
    	}
    	else if (operatorVar === "/") {
    		var calculate = parseFloat(firstVar) / parseFloat(secondVar);
-   		screen.innerHTML = parseInt(calculate);
+   		if (calculate.length <= 9) {
+   		    screen.innerHTML = Number((calculate).toFixed(5));
+   		    answer = true;
+   		    lengthCheck = [];
+   	    } else {
+   	    	var exponent = calculate.toExponential();
+   	    	var parseparse = parseFloat(exponent);
+   	    	var final = parseparse.toPrecision(6);
+   	    	screen.innerHTML = final;
+   	    	answer = true;
+   	    	lengthCheck = [];
+   	    }
    	}
     runCalc = false;
    })
