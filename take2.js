@@ -39,7 +39,6 @@ function firstNum() {
 		var num = this.dataset.value;
 		lengthCheck.push(num)
 		if (lengthCheck.length <= 9) {
-			console.log('less than 9');
 		firstVar += num;
 		screen.innerHTML += num;
 	    }
@@ -75,10 +74,11 @@ function operationSave() {
 
 function operate() {
    equals.addEventListener('click', function() {
-   	console.log(firstVar + operatorVar + secondVar);
+       var snap;  
    	if (operatorVar === "+") {
-   		var calculate = parseFloat(firstVar) + parseFloat(secondVar);
-   		if (calculate.length <= 9) {
+   		calculate = parseFloat(firstVar) + parseFloat(secondVar);
+         snap =  calculate.toString()
+   		if (snap.length <= 9) {
    		    screen.innerHTML = Number((calculate).toFixed(5));
    		    answer = true;
    		    lengthCheck = [];
@@ -86,13 +86,14 @@ function operate() {
    	    	var exponent = calculate.toExponential();
    	    	var parseparse = parseFloat(exponent);
    	    	var final = parseparse.toPrecision(6);
-   	    	screen.innerHTML = final;
+   	    	screen.innerHTML = parseparse;
    	    	answer = true;
    	    	lengthCheck = [];
    	    }
    	} else if (operatorVar === "-") {
    		var calculate = parseFloat(firstVar) - parseFloat(secondVar);
-   		if (calculate.length <= 9) {
+         snap =  calculate.toString()
+   		if (snap.length <= 9) {
    		    screen.innerHTML = Number((calculate).toFixed(5));
    		    answer = true;
    		    lengthCheck = [];
@@ -106,7 +107,8 @@ function operate() {
    	    }
    	} else if (operatorVar === "**") {
    		var calculate = parseFloat(firstVar) ** parseFloat(secondVar);
-   		if (calculate.length <= 9) {
+         snap =  calculate.toString()
+   		if (snap.length <= 9) {
    		    screen.innerHTML = Number((calculate).toFixed(5));
    		    answer = true;
    		    lengthCheck = [];
@@ -121,7 +123,8 @@ function operate() {
    	}
    	else if (operatorVar === "*") {
    		var calculate = parseFloat(firstVar) * parseFloat(secondVar);
-   		if (calculate.length <= 9) {
+         snap =  calculate.toString()
+   		if (snap.length <= 9) {
    		    screen.innerHTML = Number((calculate).toFixed(5));
    		    answer = true;
    		    lengthCheck = [];
@@ -136,7 +139,8 @@ function operate() {
    	}
    	else if (operatorVar === "/") {
    		var calculate = parseFloat(firstVar) / parseFloat(secondVar);
-   		if (calculate.length <= 9) {
+         snap =  calculate.toString()
+   		if (snap.length <= 9) {
    		    screen.innerHTML = Number((calculate).toFixed(5));
    		    answer = true;
    		    lengthCheck = [];
